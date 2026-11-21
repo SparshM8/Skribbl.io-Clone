@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neo-violet: #8b5cf6;
+  --color-neo-violetDark: #7c3aed;
+  --color-neo-cyan: #06b6d4;
+  --color-neo-cyanDark: #0891b2;
+  --color-neo-emerald: #10b981;
+  --color-neo-emeraldDark: #059669;
+  --color-neo-yellow: #facc15;
+  --color-neo-yellowDark: #eab308;
+  --color-neo-pink: #f43f5e;
+  --color-neo-pinkDark: #e11d48;
+  --color-neo-orange: #f97316;
+  --color-neo-bg: #fbf8f3;
+  --color-neo-card: #ffffff;
+  --color-neo-border: #000000;
+  --color-neo-text: #0f172a;
+
+  --font-fun: 'Space Grotesk', 'Fredoka', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-sans: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: #FBF8F3;
+    background-image: radial-gradient(#1e293b 1.25px, transparent 1.25px);
+    background-size: 24px 24px;
+    background-attachment: fixed;
+    color: #0F172A;
+    font-family: var(--font-sans);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-fun);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Neo-Brutalist Utility Classes */
+.neo-card {
+  background-color: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 1rem;
+  box-shadow: 4px 4px 0px #000000;
+}
+
+.neo-card-lg {
+  background-color: #ffffff;
+  border: 3px solid #000000;
+  border-radius: 1.5rem;
+  box-shadow: 6px 6px 0px #000000;
+}
+
+.neo-pill {
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.neo-badge {
+  border: 2px solid #000000;
+  border-radius: 0.5rem;
+  box-shadow: 2px 2px 0px #000000;
+}
+
+.neo-btn {
+  border: 2.5px solid #000000;
+  border-radius: 0.75rem;
+  font-family: var(--font-fun);
+  font-weight: 700;
+  box-shadow: 3px 3px 0px #000000;
+  transition: all 0.12s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px #000000;
+}
+
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #000000;
+}
+
+.neo-input {
+  border: 2.5px solid #000000;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: var(--font-fun);
+  font-weight: 700;
+  box-shadow: 3px 3px 0px #000000;
+  transition: all 0.12s ease-in-out;
+}
+
+.neo-input:focus {
+  outline: none;
+  box-shadow: 4px 4px 0px #8b5cf6;
+}
+
+/* Tactile Pop Buttons */
+.neo-btn-violet {
+  background-color: #8b5cf6;
+  color: #ffffff;
+}
+.neo-btn-violet:hover {
+  background-color: #7c3aed;
+}
+
+.neo-btn-cyan {
+  background-color: #06b6d4;
+  color: #000000;
+}
+.neo-btn-cyan:hover {
+  background-color: #0891b2;
+}
+
+.neo-btn-emerald {
+  background-color: #10b981;
+  color: #000000;
+}
+.neo-btn-emerald:hover {
+  background-color: #059669;
+}
+
+.neo-btn-yellow {
+  background-color: #facc15;
+  color: #000000;
+}
+.neo-btn-yellow:hover {
+  background-color: #eab308;
+}
+
+.neo-btn-pink {
+  background-color: #f43f5e;
+  color: #ffffff;
+}
+.neo-btn-pink:hover {
+  background-color: #e11d48;
+}
+
+.neo-btn-white {
+  background-color: #ffffff;
+  color: #000000;
+}
+.neo-btn-white:hover {
+  background-color: #f1f5f9;
+}
+
+/* Custom Neo-Brutalist scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-left: 2px solid #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8b5cf6;
+  border: 2px solid #000000;
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}

@@ -1,0 +1,1386 @@
+{
+ "animals": [
+  {
+   "word": "cat",
+   "difficulty": 1
+  },
+  {
+   "word": "dog",
+   "difficulty": 1
+  },
+  {
+   "word": "fish",
+   "difficulty": 1
+  },
+  {
+   "word": "bird",
+   "difficulty": 1
+  },
+  {
+   "word": "cow",
+   "difficulty": 1
+  },
+  {
+   "word": "pig",
+   "difficulty": 1
+  },
+  {
+   "word": "duck",
+   "difficulty": 1
+  },
+  {
+   "word": "frog",
+   "difficulty": 1
+  },
+  {
+   "word": "horse",
+   "difficulty": 1
+  },
+  {
+   "word": "sheep",
+   "difficulty": 1
+  },
+  {
+   "word": "snake",
+   "difficulty": 1
+  },
+  {
+   "word": "bee",
+   "difficulty": 1
+  },
+  {
+   "word": "rabbit",
+   "difficulty": 1
+  },
+  {
+   "word": "mouse",
+   "difficulty": 1
+  },
+  {
+   "word": "lion",
+   "difficulty": 1
+  },
+  {
+   "word": "elephant",
+   "difficulty": 2
+  },
+  {
+   "word": "giraffe",
+   "difficulty": 2
+  },
+  {
+   "word": "penguin",
+   "difficulty": 2
+  },
+  {
+   "word": "monkey",
+   "difficulty": 2
+  },
+  {
+   "word": "tiger",
+   "difficulty": 2
+  },
+  {
+   "word": "zebra",
+   "difficulty": 2
+  },
+  {
+   "word": "turtle",
+   "difficulty": 2
+  },
+  {
+   "word": "spider",
+   "difficulty": 2
+  },
+  {
+   "word": "dolphin",
+   "difficulty": 2
+  },
+  {
+   "word": "octopus",
+   "difficulty": 2
+  },
+  {
+   "word": "butterfly",
+   "difficulty": 2
+  },
+  {
+   "word": "kangaroo",
+   "difficulty": 2
+  },
+  {
+   "word": "owl",
+   "difficulty": 2
+  },
+  {
+   "word": "crab",
+   "difficulty": 2
+  },
+  {
+   "word": "shark",
+   "difficulty": 2
+  },
+  {
+   "word": "chameleon",
+   "difficulty": 3
+  },
+  {
+   "word": "porcupine",
+   "difficulty": 3
+  },
+  {
+   "word": "flamingo",
+   "difficulty": 3
+  },
+  {
+   "word": "hedgehog",
+   "difficulty": 3
+  },
+  {
+   "word": "peacock",
+   "difficulty": 3
+  },
+  {
+   "word": "platypus",
+   "difficulty": 3
+  },
+  {
+   "word": "jellyfish",
+   "difficulty": 3
+  },
+  {
+   "word": "seahorse",
+   "difficulty": 3
+  },
+  {
+   "word": "armadillo",
+   "difficulty": 3
+  },
+  {
+   "word": "scorpion",
+   "difficulty": 3
+  },
+  {
+   "word": "narwhal",
+   "difficulty": 3
+  },
+  {
+   "word": "woodpecker",
+   "difficulty": 3
+  }
+ ],
+ "food": [
+  {
+   "word": "apple",
+   "difficulty": 1
+  },
+  {
+   "word": "banana",
+   "difficulty": 1
+  },
+  {
+   "word": "pizza",
+   "difficulty": 1
+  },
+  {
+   "word": "egg",
+   "difficulty": 1
+  },
+  {
+   "word": "bread",
+   "difficulty": 1
+  },
+  {
+   "word": "cake",
+   "difficulty": 1
+  },
+  {
+   "word": "cheese",
+   "difficulty": 1
+  },
+  {
+   "word": "milk",
+   "difficulty": 1
+  },
+  {
+   "word": "carrot",
+   "difficulty": 1
+  },
+  {
+   "word": "cookie",
+   "difficulty": 1
+  },
+  {
+   "word": "burger",
+   "difficulty": 1
+  },
+  {
+   "word": "grapes",
+   "difficulty": 1
+  },
+  {
+   "word": "corn",
+   "difficulty": 1
+  },
+  {
+   "word": "rice",
+   "difficulty": 1
+  },
+  {
+   "word": "soup",
+   "difficulty": 1
+  },
+  {
+   "word": "sandwich",
+   "difficulty": 2
+  },
+  {
+   "word": "popcorn",
+   "difficulty": 2
+  },
+  {
+   "word": "pancake",
+   "difficulty": 2
+  },
+  {
+   "word": "spaghetti",
+   "difficulty": 2
+  },
+  {
+   "word": "watermelon",
+   "difficulty": 2
+  },
+  {
+   "word": "ice cream",
+   "difficulty": 2
+  },
+  {
+   "word": "pineapple",
+   "difficulty": 2
+  },
+  {
+   "word": "cupcake",
+   "difficulty": 2
+  },
+  {
+   "word": "donut",
+   "difficulty": 2
+  },
+  {
+   "word": "hot dog",
+   "difficulty": 2
+  },
+  {
+   "word": "broccoli",
+   "difficulty": 2
+  },
+  {
+   "word": "strawberry",
+   "difficulty": 2
+  },
+  {
+   "word": "french fries",
+   "difficulty": 2
+  },
+  {
+   "word": "pretzel",
+   "difficulty": 2
+  },
+  {
+   "word": "sushi",
+   "difficulty": 2
+  },
+  {
+   "word": "avocado",
+   "difficulty": 3
+  },
+  {
+   "word": "lasagna",
+   "difficulty": 3
+  },
+  {
+   "word": "croissant",
+   "difficulty": 3
+  },
+  {
+   "word": "dumpling",
+   "difficulty": 3
+  },
+  {
+   "word": "burrito",
+   "difficulty": 3
+  },
+  {
+   "word": "cauliflower",
+   "difficulty": 3
+  },
+  {
+   "word": "meatball",
+   "difficulty": 3
+  },
+  {
+   "word": "pomegranate",
+   "difficulty": 3
+  },
+  {
+   "word": "marshmallow",
+   "difficulty": 3
+  },
+  {
+   "word": "cinnamon roll",
+   "difficulty": 3
+  },
+  {
+   "word": "artichoke",
+   "difficulty": 3
+  },
+  {
+   "word": "baguette",
+   "difficulty": 3
+  }
+ ],
+ "objects": [
+  {
+   "word": "chair",
+   "difficulty": 1
+  },
+  {
+   "word": "table",
+   "difficulty": 1
+  },
+  {
+   "word": "cup",
+   "difficulty": 1
+  },
+  {
+   "word": "book",
+   "difficulty": 1
+  },
+  {
+   "word": "key",
+   "difficulty": 1
+  },
+  {
+   "word": "clock",
+   "difficulty": 1
+  },
+  {
+   "word": "door",
+   "difficulty": 1
+  },
+  {
+   "word": "bed",
+   "difficulty": 1
+  },
+  {
+   "word": "ball",
+   "difficulty": 1
+  },
+  {
+   "word": "hat",
+   "difficulty": 1
+  },
+  {
+   "word": "shoe",
+   "difficulty": 1
+  },
+  {
+   "word": "lamp",
+   "difficulty": 1
+  },
+  {
+   "word": "spoon",
+   "difficulty": 1
+  },
+  {
+   "word": "phone",
+   "difficulty": 1
+  },
+  {
+   "word": "bag",
+   "difficulty": 1
+  },
+  {
+   "word": "umbrella",
+   "difficulty": 2
+  },
+  {
+   "word": "scissors",
+   "difficulty": 2
+  },
+  {
+   "word": "backpack",
+   "difficulty": 2
+  },
+  {
+   "word": "guitar",
+   "difficulty": 2
+  },
+  {
+   "word": "camera",
+   "difficulty": 2
+  },
+  {
+   "word": "glasses",
+   "difficulty": 2
+  },
+  {
+   "word": "bicycle",
+   "difficulty": 2
+  },
+  {
+   "word": "candle",
+   "difficulty": 2
+  },
+  {
+   "word": "balloon",
+   "difficulty": 2
+  },
+  {
+   "word": "telescope",
+   "difficulty": 2
+  },
+  {
+   "word": "keyboard",
+   "difficulty": 2
+  },
+  {
+   "word": "headphones",
+   "difficulty": 2
+  },
+  {
+   "word": "suitcase",
+   "difficulty": 2
+  },
+  {
+   "word": "toothbrush",
+   "difficulty": 2
+  },
+  {
+   "word": "hammer",
+   "difficulty": 2
+  },
+  {
+   "word": "compass",
+   "difficulty": 3
+  },
+  {
+   "word": "hourglass",
+   "difficulty": 3
+  },
+  {
+   "word": "microscope",
+   "difficulty": 3
+  },
+  {
+   "word": "typewriter",
+   "difficulty": 3
+  },
+  {
+   "word": "lantern",
+   "difficulty": 3
+  },
+  {
+   "word": "binoculars",
+   "difficulty": 3
+  },
+  {
+   "word": "stethoscope",
+   "difficulty": 3
+  },
+  {
+   "word": "trampoline",
+   "difficulty": 3
+  },
+  {
+   "word": "chandelier",
+   "difficulty": 3
+  },
+  {
+   "word": "vending machine",
+   "difficulty": 3
+  },
+  {
+   "word": "paper",
+   "difficulty": 3
+  },
+  {
+   "word": "clip",
+   "difficulty": 3
+  },
+  {
+   "word": "cuckoo clock",
+   "difficulty": 3
+  }
+ ],
+ "actions": [
+  {
+   "word": "run",
+   "difficulty": 1
+  },
+  {
+   "word": "jump",
+   "difficulty": 1
+  },
+  {
+   "word": "sleep",
+   "difficulty": 1
+  },
+  {
+   "word": "eat",
+   "difficulty": 1
+  },
+  {
+   "word": "swim",
+   "difficulty": 1
+  },
+  {
+   "word": "dance",
+   "difficulty": 1
+  },
+  {
+   "word": "sing",
+   "difficulty": 1
+  },
+  {
+   "word": "cry",
+   "difficulty": 1
+  },
+  {
+   "word": "laugh",
+   "difficulty": 1
+  },
+  {
+   "word": "walk",
+   "difficulty": 1
+  },
+  {
+   "word": "read",
+   "difficulty": 1
+  },
+  {
+   "word": "write",
+   "difficulty": 1
+  },
+  {
+   "word": "clap",
+   "difficulty": 1
+  },
+  {
+   "word": "kick",
+   "difficulty": 1
+  },
+  {
+   "word": "wave",
+   "difficulty": 1
+  },
+  {
+   "word": "climb",
+   "difficulty": 2
+  },
+  {
+   "word": "fishing",
+   "difficulty": 2
+  },
+  {
+   "word": "cooking",
+   "difficulty": 2
+  },
+  {
+   "word": "painting",
+   "difficulty": 2
+  },
+  {
+   "word": "skiing",
+   "difficulty": 2
+  },
+  {
+   "word": "surfing",
+   "difficulty": 2
+  },
+  {
+   "word": "juggling",
+   "difficulty": 2
+  },
+  {
+   "word": "sneezing",
+   "difficulty": 2
+  },
+  {
+   "word": "hugging",
+   "difficulty": 2
+  },
+  {
+   "word": "whistling",
+   "difficulty": 2
+  },
+  {
+   "word": "shopping",
+   "difficulty": 2
+  },
+  {
+   "word": "camping",
+   "difficulty": 2
+  },
+  {
+   "word": "brushing teeth",
+   "difficulty": 2
+  },
+  {
+   "word": "riding",
+   "difficulty": 2
+  },
+  {
+   "word": "a",
+   "difficulty": 2
+  },
+  {
+   "word": "bike",
+   "difficulty": 2
+  },
+  {
+   "word": "flying a kite",
+   "difficulty": 2
+  },
+  {
+   "word": "meditating",
+   "difficulty": 3
+  },
+  {
+   "word": "tiptoeing",
+   "difficulty": 3
+  },
+  {
+   "word": "hitchhiking",
+   "difficulty": 3
+  },
+  {
+   "word": "babysitting",
+   "difficulty": 3
+  },
+  {
+   "word": "eavesdropping",
+   "difficulty": 3
+  },
+  {
+   "word": "daydreaming",
+   "difficulty": 3
+  },
+  {
+   "word": "sleepwalking",
+   "difficulty": 3
+  },
+  {
+   "word": "procrastinating",
+   "difficulty": 3
+  },
+  {
+   "word": "bungee jumping",
+   "difficulty": 3
+  },
+  {
+   "word": "arm",
+   "difficulty": 3
+  },
+  {
+   "word": "wrestling",
+   "difficulty": 3
+  },
+  {
+   "word": "window shopping",
+   "difficulty": 3
+  },
+  {
+   "word": "skydiving",
+   "difficulty": 3
+  }
+ ],
+ "places": [
+  {
+   "word": "house",
+   "difficulty": 1
+  },
+  {
+   "word": "school",
+   "difficulty": 1
+  },
+  {
+   "word": "beach",
+   "difficulty": 1
+  },
+  {
+   "word": "park",
+   "difficulty": 1
+  },
+  {
+   "word": "farm",
+   "difficulty": 1
+  },
+  {
+   "word": "hospital",
+   "difficulty": 1
+  },
+  {
+   "word": "castle",
+   "difficulty": 1
+  },
+  {
+   "word": "bridge",
+   "difficulty": 1
+  },
+  {
+   "word": "mountain",
+   "difficulty": 1
+  },
+  {
+   "word": "island",
+   "difficulty": 1
+  },
+  {
+   "word": "zoo",
+   "difficulty": 1
+  },
+  {
+   "word": "church",
+   "difficulty": 1
+  },
+  {
+   "word": "library",
+   "difficulty": 1
+  },
+  {
+   "word": "airport",
+   "difficulty": 1
+  },
+  {
+   "word": "restaurant",
+   "difficulty": 1
+  },
+  {
+   "word": "lighthouse",
+   "difficulty": 2
+  },
+  {
+   "word": "pyramid",
+   "difficulty": 2
+  },
+  {
+   "word": "volcano",
+   "difficulty": 2
+  },
+  {
+   "word": "desert",
+   "difficulty": 2
+  },
+  {
+   "word": "igloo",
+   "difficulty": 2
+  },
+  {
+   "word": "waterfall",
+   "difficulty": 2
+  },
+  {
+   "word": "stadium",
+   "difficulty": 2
+  },
+  {
+   "word": "museum",
+   "difficulty": 2
+  },
+  {
+   "word": "playground",
+   "difficulty": 2
+  },
+  {
+   "word": "supermarket",
+   "difficulty": 2
+  },
+  {
+   "word": "windmill",
+   "difficulty": 2
+  },
+  {
+   "word": "skyscraper",
+   "difficulty": 2
+  },
+  {
+   "word": "tunnel",
+   "difficulty": 2
+  },
+  {
+   "word": "harbor",
+   "difficulty": 2
+  },
+  {
+   "word": "cemetery",
+   "difficulty": 2
+  },
+  {
+   "word": "observatory",
+   "difficulty": 3
+  },
+  {
+   "word": "aquarium",
+   "difficulty": 3
+  },
+  {
+   "word": "amphitheater",
+   "difficulty": 3
+  },
+  {
+   "word": "drawbridge",
+   "difficulty": 3
+  },
+  {
+   "word": "monastery",
+   "difficulty": 3
+  },
+  {
+   "word": "greenhouse",
+   "difficulty": 3
+  },
+  {
+   "word": "planetarium",
+   "difficulty": 3
+  },
+  {
+   "word": "labyrinth",
+   "difficulty": 3
+  },
+  {
+   "word": "colosseum",
+   "difficulty": 3
+  },
+  {
+   "word": "treehouse",
+   "difficulty": 3
+  },
+  {
+   "word": "ski resort",
+   "difficulty": 3
+  },
+  {
+   "word": "haunted",
+   "difficulty": 3
+  },
+  {
+   "word": "house",
+   "difficulty": 3
+  }
+ ],
+ "nature": [
+  {
+   "word": "sun",
+   "difficulty": 1
+  },
+  {
+   "word": "moon",
+   "difficulty": 1
+  },
+  {
+   "word": "star",
+   "difficulty": 1
+  },
+  {
+   "word": "tree",
+   "difficulty": 1
+  },
+  {
+   "word": "flower",
+   "difficulty": 1
+  },
+  {
+   "word": "cloud",
+   "difficulty": 1
+  },
+  {
+   "word": "rain",
+   "difficulty": 1
+  },
+  {
+   "word": "snow",
+   "difficulty": 1
+  },
+  {
+   "word": "rainbow",
+   "difficulty": 1
+  },
+  {
+   "word": "leaf",
+   "difficulty": 1
+  },
+  {
+   "word": "river",
+   "difficulty": 1
+  },
+  {
+   "word": "grass",
+   "difficulty": 1
+  },
+  {
+   "word": "rock",
+   "difficulty": 1
+  },
+  {
+   "word": "fire",
+   "difficulty": 1
+  },
+  {
+   "word": "wave",
+   "difficulty": 1
+  },
+  {
+   "word": "lightning",
+   "difficulty": 2
+  },
+  {
+   "word": "tornado",
+   "difficulty": 2
+  },
+  {
+   "word": "mushroom",
+   "difficulty": 2
+  },
+  {
+   "word": "cactus",
+   "difficulty": 2
+  },
+  {
+   "word": "sunflower",
+   "difficulty": 2
+  },
+  {
+   "word": "icicle",
+   "difficulty": 2
+  },
+  {
+   "word": "sunset",
+   "difficulty": 2
+  },
+  {
+   "word": "forest",
+   "difficulty": 2
+  },
+  {
+   "word": "cave",
+   "difficulty": 2
+  },
+  {
+   "word": "glacier",
+   "difficulty": 2
+  },
+  {
+   "word": "feather",
+   "difficulty": 2
+  },
+  {
+   "word": "seashell",
+   "difficulty": 2
+  },
+  {
+   "word": "pinecone",
+   "difficulty": 2
+  },
+  {
+   "word": "branch",
+   "difficulty": 2
+  },
+  {
+   "word": "puddle",
+   "difficulty": 2
+  },
+  {
+   "word": "avalanche",
+   "difficulty": 3
+  },
+  {
+   "word": "northern lights",
+   "difficulty": 3
+  },
+  {
+   "word": "eclipse",
+   "difficulty": 3
+  },
+  {
+   "word": "stalactite",
+   "difficulty": 3
+  },
+  {
+   "word": "quicksand",
+   "difficulty": 3
+  },
+  {
+   "word": "tsunami",
+   "difficulty": 3
+  },
+  {
+   "word": "geyser",
+   "difficulty": 3
+  },
+  {
+   "word": "coral reef",
+   "difficulty": 3
+  },
+  {
+   "word": "meteor",
+   "difficulty": 3
+  },
+  {
+   "word": "shower",
+   "difficulty": 3
+  },
+  {
+   "word": "whirlpool",
+   "difficulty": 3
+  },
+  {
+   "word": "tide",
+   "difficulty": 3
+  },
+  {
+   "word": "pool",
+   "difficulty": 3
+  },
+  {
+   "word": "sand dune",
+   "difficulty": 3
+  }
+ ],
+ "sports": [
+  {
+   "word": "soccer",
+   "difficulty": 1
+  },
+  {
+   "word": "tennis",
+   "difficulty": 1
+  },
+  {
+   "word": "golf",
+   "difficulty": 1
+  },
+  {
+   "word": "swimming",
+   "difficulty": 1
+  },
+  {
+   "word": "boxing",
+   "difficulty": 1
+  },
+  {
+   "word": "bowling",
+   "difficulty": 1
+  },
+  {
+   "word": "baseball",
+   "difficulty": 1
+  },
+  {
+   "word": "football",
+   "difficulty": 1
+  },
+  {
+   "word": "basketball",
+   "difficulty": 1
+  },
+  {
+   "word": "skating",
+   "difficulty": 1
+  },
+  {
+   "word": "hockey",
+   "difficulty": 1
+  },
+  {
+   "word": "running",
+   "difficulty": 1
+  },
+  {
+   "word": "cycling",
+   "difficulty": 1
+  },
+  {
+   "word": "rowing",
+   "difficulty": 1
+  },
+  {
+   "word": "archery",
+   "difficulty": 1
+  },
+  {
+   "word": "volleyball",
+   "difficulty": 2
+  },
+  {
+   "word": "badminton",
+   "difficulty": 2
+  },
+  {
+   "word": "gymnastics",
+   "difficulty": 2
+  },
+  {
+   "word": "wrestling",
+   "difficulty": 2
+  },
+  {
+   "word": "skateboarding",
+   "difficulty": 2
+  },
+  {
+   "word": "snowboarding",
+   "difficulty": 2
+  },
+  {
+   "word": "weightlifting",
+   "difficulty": 2
+  },
+  {
+   "word": "ping pong",
+   "difficulty": 2
+  },
+  {
+   "word": "fencing",
+   "difficulty": 2
+  },
+  {
+   "word": "karate",
+   "difficulty": 2
+  },
+  {
+   "word": "javelin",
+   "difficulty": 2
+  },
+  {
+   "word": "marathon",
+   "difficulty": 2
+  },
+  {
+   "word": "diving",
+   "difficulty": 2
+  },
+  {
+   "word": "rugby",
+   "difficulty": 2
+  },
+  {
+   "word": "cricket",
+   "difficulty": 2
+  },
+  {
+   "word": "curling",
+   "difficulty": 3
+  },
+  {
+   "word": "triathlon",
+   "difficulty": 3
+  },
+  {
+   "word": "synchronized swimming",
+   "difficulty": 3
+  },
+  {
+   "word": "pole",
+   "difficulty": 3
+  },
+  {
+   "word": "vault",
+   "difficulty": 3
+  },
+  {
+   "word": "decathlon biathlon",
+   "difficulty": 3
+  },
+  {
+   "word": "water",
+   "difficulty": 3
+  },
+  {
+   "word": "polo",
+   "difficulty": 3
+  },
+  {
+   "word": "lacrosse equestrian bobsled hurdles",
+   "difficulty": 3
+  },
+  {
+   "word": "rock",
+   "difficulty": 3
+  },
+  {
+   "word": "climbing",
+   "difficulty": 3
+  }
+ ],
+ "jobs": [
+  {
+   "word": "doctor",
+   "difficulty": 1
+  },
+  {
+   "word": "teacher",
+   "difficulty": 1
+  },
+  {
+   "word": "farmer",
+   "difficulty": 1
+  },
+  {
+   "word": "chef",
+   "difficulty": 1
+  },
+  {
+   "word": "nurse",
+   "difficulty": 1
+  },
+  {
+   "word": "pilot",
+   "difficulty": 1
+  },
+  {
+   "word": "police officer",
+   "difficulty": 1
+  },
+  {
+   "word": "singer",
+   "difficulty": 1
+  },
+  {
+   "word": "artist",
+   "difficulty": 1
+  },
+  {
+   "word": "clown",
+   "difficulty": 1
+  },
+  {
+   "word": "baker",
+   "difficulty": 1
+  },
+  {
+   "word": "driver",
+   "difficulty": 1
+  },
+  {
+   "word": "painter",
+   "difficulty": 1
+  },
+  {
+   "word": "soldier",
+   "difficulty": 1
+  },
+  {
+   "word": "king",
+   "difficulty": 1
+  },
+  {
+   "word": "firefighter",
+   "difficulty": 2
+  },
+  {
+   "word": "astronaut",
+   "difficulty": 2
+  },
+  {
+   "word": "dentist",
+   "difficulty": 2
+  },
+  {
+   "word": "plumber",
+   "difficulty": 2
+  },
+  {
+   "word": "scientist",
+   "difficulty": 2
+  },
+  {
+   "word": "magician",
+   "difficulty": 2
+  },
+  {
+   "word": "photographer",
+   "difficulty": 2
+  },
+  {
+   "word": "mechanic",
+   "difficulty": 2
+  },
+  {
+   "word": "lifeguard",
+   "difficulty": 2
+  },
+  {
+   "word": "carpenter",
+   "difficulty": 2
+  },
+  {
+   "word": "waiter",
+   "difficulty": 2
+  },
+  {
+   "word": "cowboy",
+   "difficulty": 2
+  },
+  {
+   "word": "detective",
+   "difficulty": 2
+  },
+  {
+   "word": "pirate",
+   "difficulty": 2
+  },
+  {
+   "word": "barber",
+   "difficulty": 2
+  },
+  {
+   "word": "archaeologist",
+   "difficulty": 3
+  },
+  {
+   "word": "veterinarian",
+   "difficulty": 3
+  },
+  {
+   "word": "electrician",
+   "difficulty": 3
+  },
+  {
+   "word": "blacksmith",
+   "difficulty": 3
+  },
+  {
+   "word": "librarian",
+   "difficulty": 3
+  },
+  {
+   "word": "acrobat",
+   "difficulty": 3
+  },
+  {
+   "word": "translator",
+   "difficulty": 3
+  },
+  {
+   "word": "ventriloquist",
+   "difficulty": 3
+  },
+  {
+   "word": "beekeeper",
+   "difficulty": 3
+  },
+  {
+   "word": "taxidermist",
+   "difficulty": 3
+  },
+  {
+   "word": "sommelier",
+   "difficulty": 3
+  },
+  {
+   "word": "lumberjack",
+   "difficulty": 3
+  }
+ ]
+}
