@@ -56,14 +56,14 @@ interface Stroke { id: string; tool: 'brush' | 'eraser'; color: string; size: nu
 Only the current drawer may send these, only in phase `DRAWING`.
 | Type | Dir | Payload | Notes |
 |---|---|---|---|
-| `draw_start` 🔜 | C→S | `{ strokeId, tool, color, size, x, y }` | |
-| `draw_move` 🔜 | C→S | `{ strokeId, points: Point[] }` | Batched, ≤ ~30 ms of points, max 100 points per message. |
-| `draw_end` 🔜 | C→S | `{ strokeId }` | |
-| `canvas_clear` 🔜 | C→S and S→C | `{}` | Server clears its buffer then broadcasts to others. |
-| `draw_undo` 🔜 | C→S | `{}` | Server pops the last stroke. |
-| `draw_data` 🔜 | S→C | `{ op: 'start', stroke } \| { op: 'move', strokeId, points } \| { op: 'end', strokeId }` | Sent to everyone except the drawer. |
-| `stroke_undone` 🔜 | S→C | `{ strokeId }` | Sent to everyone including the drawer. |
-| `canvas_sync` 🔜 | S→C | `{ strokes: Stroke[] }` | Late join or reconnect. |
+| `draw_start` ✅ | C→S | `{ strokeId, tool, color, size, x, y }` | |
+| `draw_move` ✅ | C→S | `{ strokeId, points: Point[] }` | Batched, ≤ ~30 ms of points, max 100 points per message. |
+| `draw_end` ✅ | C→S | `{ strokeId }` | |
+| `canvas_clear` ✅ | C→S and S→C | `{}` | Server clears its buffer then broadcasts to others. |
+| `draw_undo` ✅ | C→S | `{}` | Server pops the last stroke. |
+| `draw_data` ✅ | S→C | `{ op: 'start', stroke } \| { op: 'move', strokeId, points } \| { op: 'end', strokeId }` | Sent to everyone except the drawer. |
+| `stroke_undone` ✅ | S→C | `{ strokeId }` | Sent to everyone including the drawer. |
+| `canvas_sync` ✅ | S→C | `{ strokes: Stroke[] }` | Late join or reconnect. |
 
 > Deviation from the suggested spec: the server does not echo `draw_data` back to the drawer, because the drawer already rendered the stroke locally. This avoids double drawing and halves outbound traffic for that client.
 

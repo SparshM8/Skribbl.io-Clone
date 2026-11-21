@@ -89,7 +89,7 @@ Flow: `socket.ts` receives a message → calls a store action → components re-
 **Late join / reconnect:** server sends `canvas_sync { strokes }` with the full stroke list.
 
 ## Reconnect
-`room_joined` returns a `token`. Client stores `{roomCode, token}` in `localStorage`. On socket reopen it sends `rejoin`. Server reattaches the socket, cancels the grace timer and sends current state plus `canvas_sync`. After 30 s without reconnecting the player is removed.
+`room_joined` returns a `token`. Client stores `{roomCode, token}` in `localStorage`. On socket reopen it sends `rejoin`. Server reattaches the socket, cancels the grace timer and sends current state plus `canvas_sync`. In active games, the grace timer holds the seat for 60 s; in lobby phase, rooms are held for 10 minutes so mobile hosts sharing links on WhatsApp won't lose their rooms.
 
 ## Scaling note (for the walkthrough)
 State is in one process's memory, which is fine for a demo. To scale, put rooms in Redis behind `RoomStore`, use pub/sub for cross-instance broadcast, and use sticky sessions for WebSocket connections.

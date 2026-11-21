@@ -71,7 +71,7 @@ Accounts and login, persistent database, payments, mobile native apps, voice cha
 - Server-held stroke list so undo, late join and reconnect all restore the canvas
 - Time-based scoring with order bonus and streak bonus
 - Private "so close!" feedback for guesses within edit distance 1
-- Session-token reconnect with a 30 s seat-holding grace period
+- Session-token reconnect with smart seat-holding grace periods (10m in lobby, 60s in-game)
 
 ## Deliverables
 1. Working app running locally and deployed

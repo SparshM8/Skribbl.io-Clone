@@ -105,7 +105,8 @@ Comprehensive architectural and technical specifications are organized in the `d
 - **Kudos / Reactions:** Send celebratory thumbs-up feedback.
 
 ### 7. Resilience & Session Recovery
-- **30-Second Seat Holding:** Disconnected players retain their seat and score during a grace period.
+- **Dual-Tier Seat Holding & Lobby Retention:** Disconnected players in active games retain their seat and score for 60 seconds; lobby rooms are preserved for 10 minutes so hosts can switch apps (e.g. WhatsApp) to invite friends without losing the room.
+- **Smart Link & Hash Routing:** Robust URL parameter and hash parser (`/?room=CODE`, `/#CODE`) with automatic session conflict isolation.
 - **Session Tokens:** `localStorage` token preservation enables seamless state, score, and canvas recovery on page refresh.
 
 ---
@@ -207,7 +208,9 @@ skribbl-clone/
 │   │   │   ├── PlayerProfileModal.tsx  # skribbl.io profile modal (kick/votekick/mute)
 │   │   │   └── Toolbar.tsx             # Brush, eraser, 14 swatches, sizes, undo/clear
 │   │   ├── net/
-│   │   │   └── socket.ts       # Typed WebSocket wrapper with token reconnect
+│   │   │   └── socket.ts       # Typed WebSocket wrapper with token reconnect & outbound queue
+│   │   ├── utils/
+│   │   │   └── invite.ts       # Robust invite URL & hash code extraction helper
 │   │   ├── screens/            # Application views
 │   │   │   ├── Home.tsx        # Landing view with nickname & avatar spotlight
 │   │   │   ├── CreateRoom.tsx  # Match settings panel (rounds, drawTime, modes)

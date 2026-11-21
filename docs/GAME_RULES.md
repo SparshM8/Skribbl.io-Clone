@@ -63,10 +63,11 @@ points = round((base + order + streak) * (mode === 'hidden' ? 1.25 : 1))
 
 A player's streak resets to 0 when they fail to guess on a turn where they were a guesser. Turns where they draw do not change their streak.
 
-## Disconnects
-- Mid-game disconnect: seat is held 30 s. They keep their score; if they reconnect they get `game_state` and `canvas_sync`.
-- After 30 s: removed from turn order and the room. If the host leaves, host moves to the next connected player.
-- If only one connected player remains, the game ends and that player wins.
+## Disconnects & Retention
+- **Lobby disconnect:** seat and room are held for **10 minutes** so the host can switch to messaging apps (e.g. WhatsApp) to invite friends without losing the room.
+- **Mid-game disconnect:** seat is held for **60 seconds**. Disconnected players keep their score; if they reconnect they get `game_state` and `canvas_sync`.
+- **After 60 seconds in-game:** removed from turn order and the room. If the host leaves, host moves to the next connected player.
+- **If only one connected player remains:** the game ends gracefully with `not_enough_players`.
 
 ## Late joiners
 Not allowed while a game is in progress (v1). Stretch: spectator mode.
