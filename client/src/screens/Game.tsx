@@ -104,8 +104,8 @@ export const Game: React.FC = () => {
 
       {/* Main 3-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 min-h-[500px]">
-        {/* Left Column: Leaderboard (3 cols on lg) */}
-        <div className="lg:col-span-3 order-2 lg:order-1 h-64 lg:h-auto">
+        {/* Leaderboard: order-3 on mobile (below chat), order-1 on desktop */}
+        <div className="lg:col-span-3 order-3 lg:order-1 h-56 sm:h-64 lg:h-auto">
           <Leaderboard
             players={room?.players ?? []}
             currentDrawerId={drawerId}
@@ -117,9 +117,9 @@ export const Game: React.FC = () => {
           />
         </div>
 
-        {/* Center Column: Canvas + Toolbar (6 cols on lg) */}
+        {/* Center Column: Canvas + Toolbar (order-1 on mobile, order-2 on desktop) */}
         <div className="lg:col-span-6 order-1 lg:order-2 flex flex-col space-y-3">
-          <div className="flex-1 min-h-[360px] sm:min-h-[460px]">
+          <div className="flex-1 min-h-[260px] sm:min-h-[420px]">
             <Canvas
               isDrawer={isDrawer}
               strokes={strokes}
@@ -153,17 +153,19 @@ export const Game: React.FC = () => {
               }}
             />
           ) : (
-            <div className="neo-card p-3 text-center text-xs font-fun font-black text-black flex items-center justify-center space-x-2 select-none">
+            <div className="neo-card p-2.5 sm:p-3 text-center text-xs font-fun font-black text-black flex items-center justify-center space-x-2 select-none">
               <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] animate-ping" />
               <span>
-                <strong>{drawerPlayer?.name || 'Drawer'}</strong> is drawing right now. Guess in the chat on the right!
+                <strong>{drawerPlayer?.name || 'Drawer'}</strong> is drawing right now.{' '}
+                <span className="hidden lg:inline">Guess in the chat on the right!</span>
+                <span className="lg:hidden">Guess in the chat below!</span>
               </span>
             </div>
           )}
         </div>
 
-        {/* Right Column: Chat & Guesses (3 cols on lg) */}
-        <div className="lg:col-span-3 order-3 h-80 lg:h-auto">
+        {/* Right Column: Chat & Guesses (order-2 on mobile, directly below canvas!) */}
+        <div className="lg:col-span-3 order-2 lg:order-3 h-72 sm:h-80 lg:h-auto">
           <Chat
             messages={messages}
             isDrawer={isDrawer}

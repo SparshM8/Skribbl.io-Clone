@@ -10,14 +10,14 @@ interface JoinRoomProps {
 export const JoinRoom: React.FC<JoinRoomProps> = ({ onBack }) => {
   const { nickname, setNickname, avatar, joinRoom, errorToast } = useGame();
   const [playerName, setPlayerName] = useState(nickname);
-  const [roomCode, setRoomCode] = useState(() => new URLSearchParams(window.location.search).get('room')?.toUpperCase() || '');
+  const [roomCode, setRoomCode] = useState(() => new URLSearchParams(window.location.search).get('room')?.replace(/[^A-Za-z0-9]/g, '').toUpperCase() || '');
   const [fieldErrors, setFieldErrors] = useState<{ room?: string; name?: string }>({});
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const errors: { room?: string; name?: string } = {};
 
-    const trimmedRoom = roomCode.trim().toUpperCase();
+    const trimmedRoom = roomCode.replace(/[^A-Za-z0-9]/g, '').toUpperCase();
     const trimmedName = playerName.trim();
 
     if (!trimmedRoom) {
@@ -86,7 +86,7 @@ export const JoinRoom: React.FC<JoinRoomProps> = ({ onBack }) => {
                 maxLength={6}
                 value={roomCode}
                 onChange={(e) => {
-                  setRoomCode(e.target.value.toUpperCase());
+                  setRoomCode(e.target.value.replace(/[^A-Za-z0-9]/g, '').toUpperCase());
                   if (fieldErrors.room) setFieldErrors((prev) => ({ ...prev, room: undefined }));
                 }}
                 placeholder="e.g. 8AB3X9"

@@ -159,6 +159,7 @@ export const Canvas: React.FC<CanvasProps> = ({
 
   const handlePointerMove = (e: React.PointerEvent<HTMLCanvasElement>) => {
     if (!isDrawer || !isDrawing || !currentStrokeIdRef.current) return;
+    e.preventDefault();
     const pt = getNormalizedPoint(e);
     if (!pt) return;
 

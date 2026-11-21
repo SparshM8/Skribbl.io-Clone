@@ -28,8 +28,14 @@ export class InMemoryRoomStore implements RoomStore {
     this.rooms.set(room.code, room);
     return room;
   }
-  get(code: string) { return this.rooms.get(code.toUpperCase()); }
-  delete(code: string) { this.rooms.delete(code); }
+  get(code: string) {
+    const clean = String(code ?? '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+    return this.rooms.get(clean);
+  }
+  delete(code: string) {
+    const clean = String(code ?? '').replace(/[^A-Za-z0-9]/g, '').toUpperCase();
+    this.rooms.delete(clean);
+  }
   listPublic() {
     return [...this.rooms.values()].filter(r => !r.settings.isPrivate && r.phase === 'LOBBY' && !r.isFull);
   }
