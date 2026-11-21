@@ -18,9 +18,9 @@ Designed and engineered for an internship assignment with clean Object-Oriented 
 
 | Service | Endpoint / URL |
 |---|---|
-| **Production App** | `https://your-deployment-url.onrender.com` *(Set upon deployment)* |
-| **Backend Health Check** | `/api/health` |
-| **WebSocket Stream** | `/ws` (Native WebSockets) |
+| **Production App (Live)** | [https://skribbl-io-clone-ws44.onrender.com](https://skribbl-io-clone-ws44.onrender.com) |
+| **Backend Health Check** | [https://skribbl-io-clone-ws44.onrender.com/api/health](https://skribbl-io-clone-ws44.onrender.com/api/health) |
+| **WebSocket Stream** | `wss://skribbl-io-clone-ws44.onrender.com/ws` |
 
 ---
 
@@ -122,6 +122,142 @@ Comprehensive architectural and technical specifications are organized in the `d
 
 ---
 
+## 🏗️ System & Network Architecture
+
+The application is engineered with an **authoritative server domain model** and a **reactive single-page client**. All critical game rules, secret word isolation, turn timers, and scoring are validated strictly by the backend.
+
+```text
+Browser (React 19 + Canvas + Zustand)
+       │
+       │  Single persistent WebSocket (/ws)
+       │  Bidirectional JSON Envelope: { type, payload }
+       ▼
+Node.js + Express + ws Server
+ ├── MessageRouter (Auth, validation, routing)
+ ├── RoomStore (In-memory room registry, swappable for Redis)
+ └── Room (Player session tracking, broadcast channels)
+      └── Game (Authoritative state machine)
+           ├── WordService (Dictionary, combination modes, no repeats)
+           ├── GuessMatcher (Unicode normalizer, Levenshtein edit distance)
+           ├── StrokeBuffer (Ordered stroke vector history for undo & late join)
+           └── scoring (Time, order bonus, and streak multiplier algorithms)
+```
+
+### Real-Time Drawing & Guessing Event Flow
+
+```text
+DRAWER CLIENT                    WEBSOCKET SERVER                   GUESSER CLIENTS
+     │                                  │                                  │
+     │── [Pointer Down / Move] ─────────┼──────────────────────────────────┤
+     │   (Local optimistic render: 0ms) │                                  │
+     │                                  │                                  │
+     │── draw_move (30ms batch) ───────▶│                                  │
+     │                                  ├── Appends to StrokeBuffer        │
+     │                                  │                                  │
+     │                                  ├── draw_data (broadcast) ────────▶│
+     │                                  │   (Suppress echo to drawer)      ├── Render Bézier curve
+     │                                  │                                  │
+     │                                  │◀── guess: "dog" ─────────────────┤
+     │                                  ├── GuessMatcher.classify()        │
+     │                                  │   ├─ Check exact match           │
+     │                                  │   └─ Levenshtein distance 1      │
+     │                                  │                                  │
+     │◀── guess_result (+pts) ──────────┼── guess_result (+pts) ──────────▶│
+     │    (Update scoreboard)           │   (Green banner, mask revealed)  │
+```
+
+### Authoritative Game State Machine
+
+```text
+LOBBY ──start_game──▶ WORD_PICK ──word_chosen / 15s timeout──▶ DRAWING
+  ▲                       ▲                                       │
+  │                       │            all guessed OR time up     ▼
+  │                       └──── next drawer ◀──────────────── ROUND_END
+  │                                                               │ last drawer of last round
+  └──────────── play_again (host) ◀──────────────────────── GAME_OVER
+```
+
+> 📖 **Deep Dive Documentation Links:**
+> - Detailed server domain classes, canvas rendering pipeline & reconnect lifecycles: **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**
+> - Complete catalog of typed client/server WebSocket message schemas: **[docs/PROTOCOL.md](docs/PROTOCOL.md)**
+> - Turn progression, Levenshtein distance & scoring formulas: **[docs/GAME_RULES.md](docs/GAME_RULES.md)**
+> - Production deployment setup & serverless (Vercel/Netlify) constraints: **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)**
+> - Full assignment requirements compliance checklist: **[docs/PROJECT_SPEC.md](docs/PROJECT_SPEC.md)**
+
+---
+
+## 📁 Project Directory Structure
+
+```text
+skribbl-clone/
+├── client/                     # Frontend Application (React 19 + TypeScript + Vite)
+│   ├── public/                 # Static assets & public images
+│   │   ├── doodle-pattern.svg  # Cream background dot-grid pattern
+│   │   └── screenshots/        # High-resolution application screenshots
+│   ├── src/
+│   │   ├── components/         # Reusable UI component library
+│   │   │   ├── Avatar.tsx              # Modular 3D Chibi SVG avatar system
+│   │   │   ├── AvatarCustomizer.tsx    # Quick avatar customizer & dice randomizer
+│   │   │   ├── Canvas.tsx              # HTML5 Canvas with normalized [0, 1] coords
+│   │   │   ├── CharacterStudio.tsx     # Full Wardrobe Studio modal
+│   │   │   ├── Chat.tsx                # Chat & guess box with mute filtering
+│   │   │   ├── GameOver.tsx            # Podium celebration with canvas confetti
+│   │   │   ├── GameTimer.tsx           # Masked word hint tiles & animated countdown
+│   │   │   ├── Leaderboard.tsx         # Player rankings, scores, medals & drawer icon
+│   │   │   ├── PlayerProfileModal.tsx  # skribbl.io profile modal (kick/votekick/mute)
+│   │   │   └── Toolbar.tsx             # Brush, eraser, 14 swatches, sizes, undo/clear
+│   │   ├── net/
+│   │   │   └── socket.ts       # Typed WebSocket wrapper with token reconnect
+│   │   ├── screens/            # Application views
+│   │   │   ├── Home.tsx        # Landing view with nickname & avatar spotlight
+│   │   │   ├── CreateRoom.tsx  # Match settings panel (rounds, drawTime, modes)
+│   │   │   ├── JoinRoom.tsx    # Room code join form with URL pre-fill
+│   │   │   ├── Lobby.tsx       # Pre-game room with player cards & ready toggles
+│   │   │   └── Game.tsx        # Active 3-column gameplay layout
+│   │   ├── store/
+│   │   │   └── useGame.ts      # Global Zustand state store
+│   │   ├── types/
+│   │   │   └── index.ts        # Shared TypeScript interfaces & types
+│   │   ├── index.css           # Neo-Brutalist & Pop-Art utility classes
+│   │   ├── App.tsx             # Root screen router & URL param handler
+│   │   └── main.tsx            # Vite entry point
+│   └── package.json
+│
+├── server/                     # Backend Application (Node.js 20+ Express + ws)
+│   ├── src/
+│   │   ├── words/
+│   │   │   └── words.json      # Categorized dictionary (8+ categories, 300+ words)
+│   │   ├── Game.ts             # Authoritative turn & round state machine
+│   │   ├── GuessMatcher.ts     # Unicode normalization & Levenshtein distance 1
+│   │   ├── MessageRouter.ts    # WebSocket message dispatcher & authentication
+│   │   ├── Player.ts           # Player domain entity with reconnect tokens
+│   │   ├── Room.ts             # Room domain entity, broadcasts & host management
+│   │   ├── RoomStore.ts        # In-memory room repository (swappable for Redis)
+│   │   ├── StrokeBuffer.ts     # Canvas stroke history for late joiners & undo
+│   │   ├── WordService.ts      # Word picker with no-repeat tracking & combination mode
+│   │   ├── index.ts            # Express server, /api/health, static SPA fallback, /ws
+│   │   ├── scoring.ts          # Pure scoring functions (speed, order, streak bonus)
+│   │   ├── timing.ts           # Scaled timer helper (supports fast automated tests)
+│   │   └── types.ts            # Server schemas, defaults & payload clamping
+│   ├── test/                   # Automated unit test suite (15/15 tests passing)
+│   ├── smoke.mjs               # Quick integration sanity test script
+│   ├── test-game.mjs           # Full multi-client end-to-end simulation script
+│   └── package.json
+│
+├── docs/                       # Technical Specifications & Documentation
+│   ├── ARCHITECTURE.md         # Full system design, classes, & reconnect lifecycle
+│   ├── PROTOCOL.md             # Complete typed WebSocket event schemas
+│   ├── GAME_RULES.md           # Game mechanics, hint timelines & scoring algorithms
+│   ├── DEPLOYMENT.md           # Production deployment guide & platform constraints
+│   ├── PROJECT_SPEC.md         # Requirements checklist mapped to assignment criteria
+│   └── screenshots/            # High-res screenshots of all game screens
+│
+├── .gitignore                  # Production gitignore
+├── package.json                # Root orchestration package.json
+└── README.md                   # Main project documentation
+
+---
+
 ## 💻 Local Setup & Running
 
 ### Prerequisites
@@ -164,41 +300,10 @@ node server/test-game.mjs
 
 ---
 
-## 🎓 Code Walkthrough Preparation
-
-### 1. How are drawing strokes captured, batched, sent, and rendered?
-- **Capture:** On `pointerdown`, coordinates are normalized to $[0, 1]$ via `(clientX - rect.left) / rect.width`. The drawer draws directly to their local canvas immediately for zero perceptible lag, and dispatches `draw_start`.
-- **Batching:** Consecutive `pointermove` events push points into an array throttled to 30 ms intervals and transmitted as `draw_move`.
-- **Rendering:** Guessers receive `draw_data` and connect points using quadratic Bézier curves (`quadraticCurveTo`) calculated through segment midpoints, ensuring fluid lines across all client frame rates.
-
-### 2. How does the server manage game state, turn order, and scoring?
-- `Game.ts` maintains an authoritative state machine: `LOBBY` $\to$ `WORD_PICK` $\to$ `DRAWING` $\to$ `ROUND_END` $\to$ `GAME_OVER`.
-- Turn order is established by snapshotting connected players at game launch. Total game turns equal $\text{rounds} \times \text{players}$.
-- **Turn Termination:** A turn concludes when all guessers guess the word (`all_guessed`), the countdown timer expires (`time_up`), or the drawer disconnects (`drawer_left`).
-- **Scoring Formula:** Guessers earn points based on time remaining, order bonus (first guesser receives the highest multiplier), and streak bonuses. The drawer receives points proportional to the number of players who guessed their drawing.
-
-### 3. How are WebSockets used for real-time synchronization?
-- A single persistent `/ws` connection per client transmits typed messages using an envelope format: `{ "type": string, "payload": object }`.
-- `MessageRouter` validates message payloads, authentication tokens, sender roles (drawer vs. guesser vs. host), and active phase before modifying server state and broadcasting to target room participants.
-- The server does not echo drawing data back to the drawer, saving outbound bandwidth and avoiding double-rendering.
-
-### 4. How does word-matching logic work? What qualifies as "close"?
-- Both the player's guess and the secret word undergo Unicode normalization, diacritic removal (`café` $\to$ `cafe`), lowercase conversion, and punctuation collapsing.
-- If the normalized string matches, the guess is scored as **correct**.
-- If the Levenshtein edit distance between the guess and the target word is exactly 1 (for words with $\ge 4$ characters), it is classified as **close**. The server emits a private `close_guess` notification exclusively to that guesser.
-
-### 5. How do session recovery and reconnects work?
-- Upon entering a room, the server issues a cryptographically random `token` stored in `localStorage`.
-- If a client temporarily disconnects, a 30-second seat-holding grace timer is initiated.
-- Upon reconnecting, the client sends `rejoin { roomCode, token }`. The server validates the token, re-attaches the WebSocket connection, cancels the grace timer, and pushes the latest `game_state` and complete `canvas_sync` history.
-
-### 6. Why can't serverless platforms (Vercel/Netlify) host the WebSocket server?
-- Vercel and Netlify functions are serverless and ephemeral: instances terminate shortly after HTTP request completion and cannot maintain persistent TCP connections.
-- WebSockets require a continuous, stateful bi-directional socket connection. Therefore, the server is hosted on long-lived platforms like Render or Railway.
-
-### 7. How would you scale this architecture horizontally?
-- The current implementation encapsulates all room states inside an in-memory `RoomStore`.
-- To scale horizontally across multiple Node.js instances:
-  1. Back `RoomStore` with Redis for distributed room state storage.
-  2. Implement Redis Pub/Sub to broadcast events across server instances.
-  3. Configure sticky sessions on the load balancer so each client's WebSocket connection stays pinned to a specific server pod.
+## 🎮 How to Play
+1. **Enter Nickname & Style Avatar:** Choose your display name and customize your 3D Chibi avatar in the Wardrobe Studio.
+2. **Create or Join a Room:** Host a private/public room or join using a 5-character room code (`#ABCDE`) or invite link.
+3. **Lobby & Ready Up:** Once all players toggle their ready status, the host starts the game.
+4. **Draw & Guess:** Each round, one player draws their chosen secret word while others guess in real-time chat.
+5. **Score Points:** Guessers earn points based on speed, streak, and order bonuses. The drawer earns points when others guess correctly.
+6. **Victory & Podium:** Complete all rounds to crown the champion on the podium with confetti celebrations!
