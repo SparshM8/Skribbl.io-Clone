@@ -22,6 +22,7 @@ export const Game: React.FC = () => {
     endsAt,
     word,
     wordOptions,
+    isPickingWord,
     hint,
     scores,
     guessedIds,
@@ -177,12 +178,13 @@ export const Game: React.FC = () => {
         </div>
       </div>
 
-      {/* Word Selection Modal (Shown to drawer and guests during SELECTING_WORD) */}
-      {wordOptions && wordOptions.length > 0 && (
+      {/* Word Selection Modal (Shown to drawer to pick, and guests while waiting) */}
+      {(isPickingWord || (wordOptions && wordOptions.length > 0)) && (
         <WordModal
           words={wordOptions}
           isDrawer={isDrawer}
           drawerName={drawerPlayer?.name}
+          endsAt={endsAt}
           onSelectWord={chooseWord}
         />
       )}
@@ -193,6 +195,7 @@ export const Game: React.FC = () => {
           data={gameOver}
           isHost={isHost}
           onPlayAgain={playAgain}
+          onLeave={leaveRoom}
         />
       )}
 

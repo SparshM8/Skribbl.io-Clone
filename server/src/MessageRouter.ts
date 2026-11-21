@@ -11,7 +11,8 @@ export interface Ctx {
   room: Room | null;
 }
 
-const GRACE_MS = 30_000; // scaled by TIME_SCALE in tests
+const LOBBY_GRACE_MS = 10 * 60 * 1000; // 10 minutes for lobby so mobile host switching to WhatsApp won't kill room
+const GAME_GRACE_MS = 60 * 1000; // 60 seconds during active gameplay
 const cleanName = (n: unknown) => String(n ?? '').trim().replace(/\s+/g, ' ').slice(0, 20);
 const raw = (ws: WebSocket, type: string, payload: unknown = {}) => {
   if (ws.readyState === ws.OPEN) ws.send(JSON.stringify({ type, payload }));
@@ -65,6 +66,8 @@ export class MessageRouter {
     if (!player || !room) return;
     player.detach();
     room.broadcast('player_left', { playerId: player.id, temporary: true, room: room.snapshot() });
+
+    const graceMs = room.phase === 'LOBBY' ? LOBBY_GRACE_MS : GAME_GRACE_MS;
     player.graceTimer = setTimeout(() => {
       if (player.connected) return;
       room.leave(player.id);
@@ -74,7 +77,7 @@ export class MessageRouter {
       } else {
         room.broadcast('player_left', { playerId: player.id, temporary: false, room: room.snapshot() });
       }
-    }, ms(GRACE_MS));
+    }, ms(graceMs));
   }
 
   // ---------- handlers ----------
@@ -85,7 +88,11 @@ export class MessageRouter {
   }
 
   private createRoom(ws: WebSocket, ctx: Ctx, p: any) {
-    if (ctx.room) return raw(ws, 'error', { message: 'Already in a room' });
+    if (ctx.room && ctx.player) {
+      ctx.room.leave(ctx.player.id);
+      ctx.player = undefined as any;
+      ctx.room = undefined as any;
+    }
     const name = cleanName(p.hostName);
     if (!name) return raw(ws, 'error', { message: 'Name required' });
     const player = new Player(name, ws, p.avatar);
@@ -96,7 +103,11 @@ export class MessageRouter {
   }
 
   private joinRoom(ws: WebSocket, ctx: Ctx, p: any) {
-    if (ctx.room) return raw(ws, 'error', { message: 'Already in a room' });
+    if (ctx.room && ctx.player) {
+      ctx.room.leave(ctx.player.id);
+      ctx.player = undefined as any;
+      ctx.room = undefined as any;
+    }
     const room = this.store.get(String(p.roomCode ?? '').trim());
     if (!room) return raw(ws, 'error', { message: 'Room not found' });
     if (room.phase !== 'LOBBY') return raw(ws, 'error', { message: 'Game already started' });

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Crown, Copy, Check, Play, Users, Clock, RotateCcw, Sparkles, CheckCircle2, Shirt, LogOut, ArrowLeft } from 'lucide-react';
+import { Crown, Copy, Check, Play, Users, Clock, RotateCcw, Sparkles, CheckCircle2, Shirt, LogOut, ArrowLeft, Share2 } from 'lucide-react';
 import { useGame } from '../store/useGame';
 import { Avatar } from '../components/Avatar';
 import { CharacterStudio } from '../components/CharacterStudio';
@@ -32,11 +32,54 @@ export const Lobby: React.FC = () => {
   const hostPlayer = room.players.find((p) => p.id === room.hostId);
   const canStart = room.players.length >= 2 && room.players.filter((p) => p.id !== room.hostId).every((p) => p.ready);
 
-  const copyInviteLink = () => {
-    const url = `${window.location.origin}/?room=${room.code}`;
-    navigator.clipboard.writeText(url);
+  const inviteUrl = `${window.location.origin}/?room=${room.code}`;
+
+  const copyInviteLink = async () => {
+    let success = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(inviteUrl);
+        success = true;
+      }
+    } catch {}
+
+    if (!success) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = inviteUrl;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        success = document.execCommand('copy');
+        document.body.removeChild(textarea);
+      } catch {}
+    }
+
+    if (!success) {
+      window.prompt('Copy room invite link:', inviteUrl);
+      success = true;
+    }
+
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const shareInviteLink = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Skribbl.io Clone',
+          text: `Join my Skribbl.io match! Room code: #${room.code}`,
+          url: inviteUrl,
+        });
+        return;
+      } catch (e: any) {
+        if (e.name === 'AbortError') return;
+      }
+    }
+    copyInviteLink();
   };
 
   const emptySlotsCount = Math.max(0, Math.min(room.settings.maxPlayers - room.players.length, 6));
@@ -68,10 +111,18 @@ export const Lobby: React.FC = () => {
                 Private Match
               </span>
             </div>
-            <div className="flex items-center justify-center sm:justify-start space-x-3">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
               <span className="text-3xl sm:text-4xl font-mono font-black tracking-widest px-3 py-1 rounded-xl bg-[#FACC15] text-black border-[2.5px] border-black shadow-[3px_3px_0px_#000]">
                 #{room.code}
               </span>
+              <button
+                onClick={shareInviteLink}
+                className="neo-btn bg-[#8B5CF6] text-white hover:bg-[#7C3AED] inline-flex items-center space-x-1.5 px-3 py-2 text-xs font-fun"
+                title="Share Invite via WhatsApp, Telegram, etc."
+              >
+                <Share2 size={15} className="stroke-[2.5]" />
+                <span>SHARE INVITE</span>
+              </button>
               <button
                 onClick={copyInviteLink}
                 className="neo-btn neo-btn-white inline-flex items-center space-x-1.5 px-3 py-2 text-xs font-fun"

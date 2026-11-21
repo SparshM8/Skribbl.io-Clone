@@ -63,7 +63,7 @@ export const Chat: React.FC<ChatProps> = ({
       </div>
 
       {/* Messages Stream */}
-      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-3 space-y-2 text-xs min-h-[220px]">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-3 space-y-2 text-xs min-h-[130px] sm:min-h-[220px]">
         {visibleMessages.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-slate-400 text-xs font-bold font-fun italic py-8 space-y-1">
             <Sparkles size={22} className="text-slate-300 stroke-[2]" />

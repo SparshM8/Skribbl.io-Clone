@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, LogIn, Hash, Sparkles } from 'lucide-react';
 import { useGame } from '../store/useGame';
 import { Avatar } from '../components/Avatar';
+import { extractInviteRoomCode } from '../utils/invite';
 
 interface JoinRoomProps {
   onBack: () => void;
@@ -10,8 +11,10 @@ interface JoinRoomProps {
 export const JoinRoom: React.FC<JoinRoomProps> = ({ onBack }) => {
   const { nickname, setNickname, avatar, joinRoom, errorToast } = useGame();
   const [playerName, setPlayerName] = useState(nickname);
-  const [roomCode, setRoomCode] = useState(() => new URLSearchParams(window.location.search).get('room')?.replace(/[^A-Za-z0-9]/g, '').toUpperCase() || '');
+  const inviteCode = extractInviteRoomCode();
+  const [roomCode, setRoomCode] = useState(() => inviteCode || '');
   const [fieldErrors, setFieldErrors] = useState<{ room?: string; name?: string }>({});
+  const [joining, setJoining] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,8 +39,10 @@ export const JoinRoom: React.FC<JoinRoomProps> = ({ onBack }) => {
     }
 
     setFieldErrors({});
+    setJoining(true);
     setNickname(trimmedName);
     joinRoom(trimmedRoom, trimmedName);
+    setTimeout(() => setJoining(false), 3000);
   };
 
   return (
@@ -60,10 +65,23 @@ export const JoinRoom: React.FC<JoinRoomProps> = ({ onBack }) => {
             <LogIn size={22} className="stroke-[2.5]" />
           </div>
           <div>
-            <h2 className="text-xl sm:text-2xl font-fun font-black text-black">Join a Room</h2>
-            <p className="text-xs font-bold text-slate-600">Enter the room code shared by your host.</p>
+            <h2 className="text-xl sm:text-2xl font-fun font-black text-black">
+              {inviteCode ? 'Match Invitation' : 'Join a Room'}
+            </h2>
+            <p className="text-xs font-bold text-slate-600">
+              {inviteCode ? `You've been invited to room #${inviteCode}` : 'Enter the room code shared by your host.'}
+            </p>
           </div>
         </div>
+
+        {inviteCode && (
+          <div className="p-3.5 rounded-xl border-2 border-black bg-[#FEF08A] text-black text-xs font-bold shadow-[2px_2px_0px_#000] flex items-center space-x-2 font-fun">
+            <Sparkles size={18} className="text-[#8B5CF6] shrink-0" />
+            <span>
+              Invited to match <strong>#{inviteCode}</strong>! Pick a nickname to jump in.
+            </span>
+          </div>
+        )}
 
         {errorToast && (
           <div className="p-3.5 rounded-xl border-2 border-black bg-[#FEE2E2] text-[#991B1B] text-xs font-bold shadow-[2px_2px_0px_#000]">
@@ -129,10 +147,11 @@ export const JoinRoom: React.FC<JoinRoomProps> = ({ onBack }) => {
           {/* Submit */}
           <button
             type="submit"
+            disabled={joining}
             className="w-full py-4 neo-btn neo-btn-cyan text-base flex items-center justify-center space-x-2"
           >
             <Sparkles size={20} className="stroke-[2.5]" />
-            <span>JOIN GAME LOBBY</span>
+            <span>{joining ? 'JOINING ROOM...' : 'JOIN GAME LOBBY'}</span>
           </button>
         </form>
       </div>

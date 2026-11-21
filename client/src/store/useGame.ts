@@ -42,6 +42,7 @@ interface GameState {
   endsAt: number;
   word: string | null;
   wordOptions: string[];
+  isPickingWord: boolean;
   hint: string;
   scores: Record<string, number>;
   guessedIds: string[];
@@ -151,6 +152,7 @@ export const useGame = create<GameState>((set, get) => {
       drawerId: p.drawerId,
       endsAt: p.endsAt,
       wordOptions: p.wordOptions ?? [],
+      isPickingWord: true,
       word: null,
       hint: '',
       strokes: [],
@@ -167,6 +169,7 @@ export const useGame = create<GameState>((set, get) => {
       hint: p.hint ?? '',
       word: p.word ?? null,
       wordOptions: [],
+      isPickingWord: false,
       roundEnd: null,
     });
   });
@@ -210,6 +213,7 @@ export const useGame = create<GameState>((set, get) => {
       scores: p.scores ?? {},
       guessedIds: p.guessedIds ?? [],
       wordOptions: p.wordOptions ?? [],
+      isPickingWord: p.phase === 'WORD_PICK',
       word: p.word ?? null,
     });
   });
@@ -339,6 +343,7 @@ export const useGame = create<GameState>((set, get) => {
     endsAt: 0,
     word: null,
     wordOptions: [],
+    isPickingWord: false,
     hint: '',
     scores: {},
     guessedIds: [],

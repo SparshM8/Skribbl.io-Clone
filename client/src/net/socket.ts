@@ -5,27 +5,40 @@ class SocketService {
   private listeners: Map<string, Set<Listener>> = new Map();
   private reconnectTimer: any = null;
   private shouldReconnect = true;
+  private connectPromise: Promise<void> | null = null;
+  private outboundQueue: string[] = [];
 
   get isOpen(): boolean {
     return this.ws !== null && this.ws.readyState === WebSocket.OPEN;
   }
 
   connect(): Promise<void> {
-    return new Promise((resolve) => {
-      if (this.isOpen) return resolve();
+    if (this.isOpen) return Promise.resolve();
+    if (this.connectPromise) return this.connectPromise;
 
-      const url = import.meta.env.VITE_WS_URL || 
+    this.connectPromise = new Promise<void>((resolve) => {
+      const url =
+        import.meta.env.VITE_WS_URL ||
         `${window.location.protocol === 'https:' ? 'wss:' : 'ws:'}//${window.location.host}/ws`;
 
       try {
-        this.ws = new WebSocket(url);
+        const ws = new WebSocket(url);
+        this.ws = ws;
 
-        this.ws.onopen = () => {
+        ws.onopen = () => {
+          this.connectPromise = null;
           this.emit('_connected', {});
+          // Flush any queued outbound messages immediately
+          while (this.outboundQueue.length > 0) {
+            const rawMsg = this.outboundQueue.shift();
+            if (rawMsg && ws.readyState === WebSocket.OPEN) {
+              ws.send(rawMsg);
+            }
+          }
           resolve();
         };
 
-        this.ws.onmessage = (event) => {
+        ws.onmessage = (event) => {
           try {
             const data = JSON.parse(event.data);
             if (data && typeof data.type === 'string') {
@@ -36,7 +49,8 @@ class SocketService {
           }
         };
 
-        this.ws.onclose = () => {
+        ws.onclose = () => {
+          this.connectPromise = null;
           this.ws = null;
           this.emit('_disconnected', {});
           if (this.shouldReconnect) {
@@ -45,22 +59,29 @@ class SocketService {
           }
         };
 
-        this.ws.onerror = (err) => {
+        ws.onerror = (err) => {
           console.warn('WebSocket error:', err);
+          this.connectPromise = null;
+          resolve();
         };
       } catch (err) {
+        this.connectPromise = null;
         console.error('Connection attempt failed:', err);
-        if (this.shouldReconnect) {
-          if (this.reconnectTimer) clearTimeout(this.reconnectTimer);
-          this.reconnectTimer = setTimeout(() => this.connect(), 2000);
-        }
+        resolve();
       }
     });
+
+    return this.connectPromise;
   }
 
   send(type: string, payload: unknown = {}): void {
+    const rawMsg = JSON.stringify({ type, payload });
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
-      this.ws.send(JSON.stringify({ type, payload }));
+      this.ws.send(rawMsg);
+    } else {
+      // Queue message and trigger connection
+      this.outboundQueue.push(rawMsg);
+      this.connect();
     }
   }
 

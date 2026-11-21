@@ -5,13 +5,26 @@ import { CreateRoom } from './screens/CreateRoom';
 import { JoinRoom } from './screens/JoinRoom';
 import { Lobby } from './screens/Lobby';
 import { Game } from './screens/Game';
+import { extractInviteRoomCode } from './utils/invite';
 
 export const App: React.FC = () => {
   const { screen, rejoin } = useGame();
-  const [subView, setSubView] = useState<'HOME' | 'CREATE' | 'JOIN'>('HOME');
+  const inviteCode = extractInviteRoomCode();
+  const [subView, setSubView] = useState<'HOME' | 'CREATE' | 'JOIN'>(() => {
+    return inviteCode ? 'JOIN' : 'HOME';
+  });
 
-  // Attempt session restoration on initial mount
+  // Handle session restoration OR invite link on initial mount
   useEffect(() => {
+    if (inviteCode) {
+      // If user opened an invite link, do not restore an old session from a different room
+      try {
+        localStorage.removeItem('skribbl_session');
+      } catch {}
+      setSubView('JOIN');
+      return;
+    }
+
     try {
       const raw = localStorage.getItem('skribbl_session');
       if (raw) {
@@ -21,15 +34,7 @@ export const App: React.FC = () => {
         }
       }
     } catch {}
-  }, [rejoin]);
-
-  // Handle URL param ?room=CODE
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('room')) {
-      setSubView('JOIN');
-    }
-  }, []);
+  }, [inviteCode, rejoin]);
 
   if (screen === 'lobby') {
     return <Lobby />;
